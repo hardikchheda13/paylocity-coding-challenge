@@ -1,0 +1,12 @@
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\bin\Debug\netcoreapp3.1\BenefitsService.deps.json
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\bin\Debug\netcoreapp3.1\BenefitsService.dll
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\bin\Debug\netcoreapp3.1\BenefitsService.pdb
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\bin\Debug\netcoreapp3.1\BenefitsDataService.dll
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\bin\Debug\netcoreapp3.1\BenefitsDataService.pdb
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\obj\Debug\netcoreapp3.1\BenefitsService.csproj.AssemblyReference.cache
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\obj\Debug\netcoreapp3.1\BenefitsService.AssemblyInfoInputs.cache
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\obj\Debug\netcoreapp3.1\BenefitsService.AssemblyInfo.cs
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\obj\Debug\netcoreapp3.1\BenefitsService.csproj.CoreCompileInputs.cache
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\obj\Debug\netcoreapp3.1\BenefitsService.csproj.CopyComplete
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\obj\Debug\netcoreapp3.1\BenefitsService.dll
+C:\Users\hardi\source\repos\Paylocity Benefits\BenefitsService\obj\Debug\netcoreapp3.1\BenefitsService.pdb
