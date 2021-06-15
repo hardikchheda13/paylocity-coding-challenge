@@ -21,7 +21,8 @@ namespace BenefitsService.BenefitsService
         {
             if(!_benefitsDataSource.IsEmployerAvailable(employerID))
             {
-                return AddEmployerAndReturnEmptyData(employerID);
+                AddEmployer(employerID);
+                return "";
             }
 
             var employeeList = _benefitsDataSource.GetBeneficiariesGivenEomplyerID(employerID);
@@ -34,7 +35,7 @@ namespace BenefitsService.BenefitsService
                     ID = employee.ID,
                     FirstName = employee.FirstName,
                     LastName = employee.LastName,
-                    BeneficiaryType = employee.BeneficiaryType.Person_Type,
+                    BeneficiaryType = employee.BeneficiaryType.PersonType,
                     Cost = _benefitsCostCalulator.CalculateBenefitsCostGivenBeneficiary(employee),
                     DependentCostData = GetDependentCostData(employee.Dependents, out double costOfAllDependents)
                 };
@@ -51,10 +52,9 @@ namespace BenefitsService.BenefitsService
             return json;
         }
 
-        private string AddEmployerAndReturnEmptyData(int employerID)
+        private void AddEmployer(int employerID)
         {
             _benefitsDataSource.AddEmployer(employerID);
-            return "";
         }
 
         List<DependentCostData> GetDependentCostData(ICollection<Dependent> dependents, out double costOfAllDependents)
@@ -68,18 +68,23 @@ namespace BenefitsService.BenefitsService
                     ID = dependent.ID,
                     FirstName = dependent.FirstName,
                     LastName = dependent.LastName,
-                    BeneficiaryType = dependent.BeneficiaryType.Person_Type,
+                    BeneficiaryType = dependent.BeneficiaryType.PersonType,
                     Cost = _benefitsCostCalulator.CalculateBenefitsCostGivenBeneficiary(dependent)
                 };
+                dependentCostData.Add(dependentCostDatum);
                 costOfAllDependents += dependentCostDatum.Cost;
             }
             return dependentCostData;
         }
 
-        public string AddEmployee(Employee employee)
+        public string AddEmployee(BeneficiaryRequestData employee)
         {
+            if (!_benefitsDataSource.IsEmployerAvailable(employee.EmployerID))
+            {
+                AddEmployer(employee.EmployerID);
+            }
             _benefitsDataSource.AddEmployee(employee);
-            return CalculateBenefitsCostForGivenEmployer(employee.EmployerFK);
+            return CalculateBenefitsCostForGivenEmployer(employee.EmployerID);
         }
     }
 }

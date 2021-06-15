@@ -5,36 +5,32 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\scripts\app.js" />
-    <Content Remove="wwwroot\scripts\app.js.map" />
-    <Content Remove="wwwroot\scripts\app.ts" />
-    <Content Remove="wwwroot\scripts\AppWindow.ts" />
+    <TypeScriptCompile Remove="wwwroot\scripts\app.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\scripts\app.js" />
-    <None Include="wwwroot\scripts\app.js.map" />
+    <Content Include="wwwroot\scripts\app.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.7" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.11.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Logging" Version="6.11.1" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.3.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="5.0.0" />
+    <PackageReference Include="System.Windows.Extensions" Version="5.0.0" />
     <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BenefitsService\BenefitsService.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\scripts\app.ts" />
-    <TypeScriptCompile Include="wwwroot\scripts\AppWindow.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Update="wwwroot\scripts\app.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
   </ItemGroup>
 
 

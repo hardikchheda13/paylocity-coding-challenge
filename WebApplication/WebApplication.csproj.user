@@ -6,14 +6,4 @@
   <PropertyGroup>
     <ActiveDebugProfile>WebApplication</ActiveDebugProfile>
   </PropertyGroup>
-  <ItemGroup>
-    <TypeScriptCompile Update="wwwroot\scripts\AppWindow.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Update="wwwroot\scripts\app.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-  </ItemGroup>
 </Project>

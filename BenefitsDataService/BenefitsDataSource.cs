@@ -19,13 +19,14 @@ namespace BenefitsDataService
         public List<Employee> GetBeneficiariesGivenEomplyerID(int employerID)
         {
             return _benefitsDbContext.Employees.Where(s => s.EmployerFK == employerID)
-                .Include(s => s.Dependents).ToList();
+                .Include(s=> s.BeneficiaryType).Include(s=> s.Dependents).ThenInclude(s=>s.BeneficiaryType).ToList();
+
         }
 
         public double GetCostGivenBeneficiary(Beneficiary beneficiary)
         {
-            return _benefitsDbContext.Costs.Where(s => s.BeneficiaryTypeFK == beneficiary.BeneficiaryTypeFK
-            && s.EmployerFK == beneficiary.EmployerFK).Select(s => s.Amount).FirstOrDefault();
+            return decimal.ToDouble(_benefitsDbContext.Costs.Where(s => s.BeneficiaryTypeFK == beneficiary.BeneficiaryTypeFK
+            && s.EmployerFK == beneficiary.EmployerFK).Select(s => s.Amount).FirstOrDefault());
         }
 
         public List<NameStartsWithDiscountRate> GetNameStartsWithDiscountRates()
@@ -33,29 +34,42 @@ namespace BenefitsDataService
             return _benefitsDbContext.NameStartsWithDiscountRates.ToList();
         }
 
-        public void AddEmployee(Employee employee)
-        {            
+        public void AddEmployee(BeneficiaryRequestData beneficiary)
+        {
+            var employee = new Employee
+            {
+                FirstName = beneficiary.FirstName,
+                LastName = beneficiary.LastName,
+                EmployerFK = beneficiary.EmployerID
+            };
             employee.BeneficiaryTypeFK = GetBeneficiaryTypeID(Enums.BeneficiaryType.Employee);
             _benefitsDbContext.Employees.Add(employee);
 
             _benefitsDbContext.SaveChanges();
-            foreach(var dependent in employee.Dependents)
+            _benefitsDbContext.Employees.Attach(employee);
+            foreach(var dependent in beneficiary.Dependents)
             {
-                AddDependent(dependent, employee.ID);
+                AddDependent(dependent, employee.ID, beneficiary.EmployerID);
             }
         }
 
-        public void AddDependent(Dependent dependent, int employeeID)
+        public void AddDependent(BeneficiaryRequestData dependent, int employeeID, int employerID)
         {
-            dependent.EmployeeFK = employeeID;
-            dependent.BeneficiaryTypeFK = GetBeneficiaryTypeID(Enums.BeneficiaryType.Dependent);
-            _benefitsDbContext.Dependents.Add(dependent);
+            var newDependent = new Dependent
+            {
+                FirstName = dependent.FirstName,
+                LastName = dependent.LastName,
+                EmployeeFK = employeeID,
+                BeneficiaryTypeFK = GetBeneficiaryTypeID(Enums.BeneficiaryType.Dependent),
+                EmployerFK = employerID
+            };
+            _benefitsDbContext.Dependents.Add(newDependent);
             _benefitsDbContext.SaveChanges();
         }
 
         private int GetBeneficiaryTypeID(Enums.BeneficiaryType beneficiaryType)
         {
-            return _benefitsDbContext.BeneficiaryTypes.Where(s => s.Person_Type == beneficiaryType.ToString())
+            return _benefitsDbContext.BeneficiaryTypes.Where(s => s.PersonType == beneficiaryType.ToString())
                 .FirstOrDefault().ID;
         }
 
@@ -72,7 +86,9 @@ namespace BenefitsDataService
                 Name = Constant.EmployerName
             };
             _benefitsDbContext.Employers.Add(employer);
+            _benefitsDbContext.SaveChanges();
             var dependentCost = new Cost
+
             {
                 EmployerFK = employerID,
                 BeneficiaryTypeFK = GetBeneficiaryTypeID(Enums.BeneficiaryType.Dependent),
@@ -85,6 +101,7 @@ namespace BenefitsDataService
                 Amount = Constant.EmployeeAnnualBenefitsCost
             };
             _benefitsDbContext.Costs.Add(dependentCost);
+            _benefitsDbContext.SaveChanges();
             _benefitsDbContext.Costs.Add(employeeCost);
             _benefitsDbContext.SaveChanges();
         } 

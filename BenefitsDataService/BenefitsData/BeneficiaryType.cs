@@ -11,6 +11,6 @@ namespace BenefitsDataService.BenefitsData
         public int ID { get; set; }
 
         [Column("BENEFICIARY_TYPE"), Required]
-        public string Person_Type { get; set; }
+        public string PersonType { get; set; }
     }
 }

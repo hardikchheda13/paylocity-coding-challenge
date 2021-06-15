@@ -25,7 +25,7 @@ namespace BenefitsService.BenefitsService.BenefitsDiscountCalculator
             {
                 if(beneficiary.FirstName.StartsWith(nameStartwithRate.PrefixString))
                 {
-                    discountRate = Math.Max(discountRate, nameStartwithRate.Rate);
+                    discountRate = Math.Max(discountRate, decimal.ToDouble(nameStartwithRate.Rate));
                 }
             }
 

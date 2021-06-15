@@ -18,20 +18,20 @@ namespace WebApplication.Controllers
             _benefitsService = benefitsService;
         }
 
-        [Route("employercost")]
+        [Route("employercost/{employerID}")]
         [HttpGet]
-        public HttpResponseMessage GetEmployerCostData(int employerID)
+        public IActionResult GetEmployerCostData(int employerID)
         {
             var json = _benefitsService.CalculateBenefitsCostForGivenEmployer(employerID);
-            return SendJsonData(json);
+            return Ok(json);
         }
 
         [Route("employee")]
-        [HttpGet, HttpPost]
-        public HttpResponseMessage AddEmployee(Employee employee)
+        [HttpPost]
+        public IActionResult AddEmployee(BeneficiaryRequestData employee)
         {
             var json = _benefitsService.AddEmployee(employee);
-            return SendJsonData(json);
+            return Ok(json);
         }
 
         private HttpResponseMessage SendJsonData(string jsonData)

@@ -18,9 +18,9 @@ namespace BenefitsDataService.BenefitsData
 
         [DataMember(Name = "amount")]
         [Required, Column("AMOUNT")]
-        public double Amount { get; set; }
+        public Decimal Amount { get; set; }
 
-        [Required, Column("BENEFICIARY_TYPE_FK"), ForeignKey("BenficiaryType")]
+        [Required, Column("BENEFICIARY_TYPE_FK"), ForeignKey("BeneficiaryType")]
         public int BeneficiaryTypeFK { get; set; }
 
         [Required, Column("EMPLOYER_FK"), ForeignKey("Employer")]

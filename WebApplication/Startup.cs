@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using BenefitsDataService;
 using BenefitsService.BenefitsService;
 using Unity;
+using Newtonsoft.Json;
 
 namespace WebApplication
 {
@@ -26,9 +27,10 @@ namespace WebApplication
         {            
             services.AddControllers();
 
-            services.AddDbContext<BenefitsDbContext>(opt =>
-                                               opt.UseInMemoryDatabase("BenefitsService"));
-
+            //services.AddDbContext<BenefitsDbContext>(opt =>
+            //                                   opt.UseInMemoryDatabase("BenefitsService"));
+            services.AddDbContext<BenefitsDbContext>(options =>
+        options.UseSqlServer("Server=tcp:paylocity-interview-hardik.database.windows.net,1433;Initial Catalog=BenefitsDev;Persist Security Info=False;User ID=hardikchheda;Password=interview@paylocity123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30"));
             services.AddScoped<IBenefitsDataSource, BenefitsDataSource>();
             
             services.AddScoped<BenefitsService.BenefitsService.BenefitsDiscountCalculator.IDiscountCalculator, 
@@ -36,6 +38,10 @@ namespace WebApplication
             services.AddScoped<BenefitsService.BenefitsService.BenefitsCostCalulator.IBenefitsCostCalculator, 
                 BenefitsService.BenefitsService.BenefitsCostCalulator.BenefitsCostCalculator>();
             services.AddScoped<IBenefitsService, BenefitsService.BenefitsService.BenefitsService>();
+
+            services.AddControllers()
+                    .AddJsonOptions(options =>
+                       options.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

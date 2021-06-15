@@ -12,7 +12,7 @@ namespace BenefitsDataService
 
         public List<NameStartsWithDiscountRate> GetNameStartsWithDiscountRates();
 
-        public void AddEmployee(Employee employee);
+        public void AddEmployee(BeneficiaryRequestData employee);
 
         public bool IsEmployerAvailable(int employerID);
         void AddEmployer(int emploerID);

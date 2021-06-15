@@ -7,7 +7,7 @@ namespace BenefitsDataService.BenefitsData
     class Constant
     {
         public const string EmployerName = "AZ Group";
-        public const double EmployeeAnnualBenefitsCost = 1000;
-        public const double DependentAnnualBenefitsCost = 500;
+        public const decimal EmployeeAnnualBenefitsCost = 1000;
+        public const decimal DependentAnnualBenefitsCost = 500;
     }
 }

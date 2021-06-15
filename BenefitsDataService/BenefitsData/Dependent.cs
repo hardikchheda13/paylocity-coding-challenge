@@ -10,7 +10,7 @@ namespace BenefitsDataService.BenefitsData
     [Table("DEPENDENTS")]
     public class Dependent : Beneficiary
     {
-        [Key, Column("EMPLOYEE_PK")]
+        [Key, Column("DEPENDENT_PK")]
         public int ID { get; set; }
 
         [Required, Column("EMPLOYEE_FK"), ForeignKey("Employee")]
