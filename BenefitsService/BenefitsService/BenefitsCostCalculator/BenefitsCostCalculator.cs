@@ -23,7 +23,9 @@ namespace BenefitsService.BenefitsService.BenefitsCostCalulator
         public double CalculateBenefitsCostGivenBeneficiary(Beneficiary beneficiary)
         {
             var benefitsCost = _benefitsDataSource.GetAnnualBenefitsCostGivenBeneficiary(beneficiary); 
-                return benefitsCost - _discountCalculator.CalculateDiscountGivenBeneficiaryAndCost(beneficiary, benefitsCost); 
+                
+                var discount = _discountCalculator.CalculateDiscountGivenBeneficiaryAndCost(beneficiary, benefitsCost);
+            return benefitsCost - discount;
         }
     }
 }
