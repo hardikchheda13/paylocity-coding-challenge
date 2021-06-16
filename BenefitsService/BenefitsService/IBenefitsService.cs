@@ -9,6 +9,6 @@ namespace BenefitsService.BenefitsService
     {
         public string CalculateBenefitsCostForGivenEmployer(int employerID);
 
-        public string AddEmployee(BeneficiaryRequestData employee);
+        public string AddNewEmployee(BeneficiaryRequestData employee);
     }
 }

@@ -7,7 +7,6 @@ using System.Runtime.Serialization;
 namespace BenefitsDataService.BenefitsData
 {
     [Table("EMPLOYEES")]
-    [DataContract]
     public class Employee : Beneficiary
     {
         [Key, Column("EMPLOYEE_PK")]

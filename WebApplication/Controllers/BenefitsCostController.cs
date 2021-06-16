@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using BenefitsService.BenefitsService;
 using BenefitsDataService.BenefitsData;
+using BenefitsService;
 
 namespace WebApplication.Controllers
 {
@@ -28,17 +29,24 @@ namespace WebApplication.Controllers
 
         [Route("employee")]
         [HttpPost]
-        public IActionResult AddEmployee(BeneficiaryRequestData employee)
-        {
-            var json = _benefitsService.AddEmployee(employee);
+        public IActionResult AddEmployee(BeneficiaryRequestData beneficiaryRequestData)
+        {           
+            if(!ValidateBeneficiaryRequestData(beneficiaryRequestData))
+            {
+                return BadRequest("whole or part of the request is missing");
+            }
+            var json = _benefitsService.AddNewEmployee(beneficiaryRequestData);
             return Ok(json);
         }
 
-        private HttpResponseMessage SendJsonData(string jsonData)
+        private bool ValidateBeneficiaryRequestData(BeneficiaryRequestData beneficiaryRequestData)
         {
-            var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-            response.Content = new StringContent(jsonData, Encoding.Unicode);
-            return response;
+            if(beneficiaryRequestData == null || beneficiaryRequestData.FirstName == null || beneficiaryRequestData.FirstName == string.Empty)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

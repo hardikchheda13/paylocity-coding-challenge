@@ -21,7 +21,7 @@ namespace BenefitsService.BenefitsService
         {
             if(!_benefitsDataSource.IsEmployerAvailable(employerID))
             {
-                AddEmployer(employerID);
+                AddNewEmployer(employerID);
                 return "";
             }
 
@@ -52,9 +52,9 @@ namespace BenefitsService.BenefitsService
             return json;
         }
 
-        private void AddEmployer(int employerID)
+        private void AddNewEmployer(int employerID)
         {
-            _benefitsDataSource.AddEmployer(employerID);
+            _benefitsDataSource.AddNewEmployer(employerID);
         }
 
         List<DependentCostData> GetDependentCostData(ICollection<Dependent> dependents, out double costOfAllDependents)
@@ -77,14 +77,32 @@ namespace BenefitsService.BenefitsService
             return dependentCostData;
         }
 
-        public string AddEmployee(BeneficiaryRequestData employee)
+        public string AddNewEmployee(BeneficiaryRequestData beneficiaryRequestData)
         {
-            if (!_benefitsDataSource.IsEmployerAvailable(employee.EmployerID))
+            if (!_benefitsDataSource.IsEmployerAvailable(beneficiaryRequestData.EmployerID))
             {
-                AddEmployer(employee.EmployerID);
+                AddNewEmployer(beneficiaryRequestData.EmployerID);
             }
-            _benefitsDataSource.AddEmployee(employee);
-            return CalculateBenefitsCostForGivenEmployer(employee.EmployerID);
+            var employee = new Employee
+            {
+                FirstName = beneficiaryRequestData.FirstName,
+                LastName = beneficiaryRequestData.LastName,
+                EmployerFK = beneficiaryRequestData.EmployerID
+            };
+            _benefitsDataSource.AddNewEmployee(employee);
+            foreach(var dependent in beneficiaryRequestData.Dependents)
+            {
+                var newDependent = new Dependent
+                {
+                    FirstName = dependent.FirstName,
+                    LastName = dependent.LastName,
+                    EmployeeFK = employee.ID,
+                    EmployerFK = beneficiaryRequestData.EmployerID
+                };
+
+                _benefitsDataSource.AddDependent(newDependent);
+            }
+            return CalculateBenefitsCostForGivenEmployer(employee.EmployerFK);
         }
     }
 }

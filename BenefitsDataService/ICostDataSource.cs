@@ -5,7 +5,8 @@ using System.Text;
 
 namespace BenefitsDataService
 {
-    public interface IBenefitsDataSource : IEmployerDataService, IBeneficiaryDataSource, ICostDataSource, IDiscountRateDataSource
+    public interface ICostDataSource
     {
+        public double GetAnnualBenefitsCostGivenBeneficiary(Beneficiary beneficiary);
     }
 }

@@ -3,10 +3,9 @@
     $("#addEmployeeButton").click(addEmployeeButtonHandler);
     $("#submitEmployeeButton").click(submitEmployeeHandler);;
     $("#addDependentDiv").click(addDependentClickHandler);
-
 });
 
-function submitEmployerIDHandler(eventObject: any) {
+function submitEmployerIDHandler() {
     const employerID: number = parseInt($(".employerID").first().val().toString());
     validateEmployerID(employerID);
     $.getJSON(`api/employerCost/${employerID}`).done(result => {
@@ -19,7 +18,7 @@ function displayResult(result: any) {
     $(".resultDisplay").removeClass("d-none");
 }
 
-function addEmployeeButtonHandler(addEmployeeButtonHandler: any) {
+function addEmployeeButtonHandler() {
     const employerID: number = parseInt($(".employerID").first().val().toString());
 
     $(".newEmployee .employeeDetails").removeClass("d-none");
@@ -31,12 +30,12 @@ function addEmployeeButtonHandler(addEmployeeButtonHandler: any) {
 function validateEmployerID(employerID: number): boolean
 {
     if (!employerID || isNaN(employerID)) {
-        alert("Enter valid valid employer ID");
+        alert("Enter valid employer ID");
         return;
     }
 }
 
-function addDependentClickHandler(addDependentClickHandler: any) {
+function addDependentClickHandler() {
     const dependentHTML = `
                         <div class="row dependentDetails">
                     <div class="col firstNameDiv">
@@ -72,7 +71,7 @@ function submitEmployeeHandler() {
         let dependentFirstName: string = $(item).find('input.firstName').val().toString();
         let dependentLastName: string = $(item).find('input.lastName').val().toString();
         if (!dependentFirstName && !dependentLastName) {
-            alert("Enter all dependents value");
+            alert("Enter Dependents' details");
             return;
         }
         dependents.push(new Beneficiary(dependentFirstName, dependentLastName));
@@ -89,13 +88,11 @@ function submitEmployeeHandler() {
     }).fail(s => {
         console.log(s);
     })
-    
 }
 
 class Beneficiary {
     firstName: string;
     lastName: string;
-
     constructor(firstName: string, lastName: string) {
         this.firstName = firstName;
         this.lastName = lastName;

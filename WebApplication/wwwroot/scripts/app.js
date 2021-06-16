@@ -5,7 +5,7 @@ $(document).ready(() => {
     ;
     $("#addDependentDiv").click(addDependentClickHandler);
 });
-function submitEmployerIDHandler(eventObject) {
+function submitEmployerIDHandler() {
     const employerID = parseInt($(".employerID").first().val().toString());
     validateEmployerID(employerID);
     $.getJSON(`api/employerCost/${employerID}`).done(result => {
@@ -16,7 +16,7 @@ function displayResult(result) {
     $(".resultDisplay").text(`Total annual cost for all your employees is ${result.TotalCost} `);
     $(".resultDisplay").removeClass("d-none");
 }
-function addEmployeeButtonHandler(addEmployeeButtonHandler) {
+function addEmployeeButtonHandler() {
     const employerID = parseInt($(".employerID").first().val().toString());
     $(".newEmployee .employeeDetails").removeClass("d-none");
     $("#addEmployeeButton").addClass("d-none");
@@ -25,11 +25,11 @@ function addEmployeeButtonHandler(addEmployeeButtonHandler) {
 }
 function validateEmployerID(employerID) {
     if (!employerID || isNaN(employerID)) {
-        alert("Enter valid valid employer ID");
+        alert("Enter valid employer ID");
         return;
     }
 }
-function addDependentClickHandler(addDependentClickHandler) {
+function addDependentClickHandler() {
     const dependentHTML = `
                         <div class="row dependentDetails">
                     <div class="col firstNameDiv">
@@ -63,7 +63,7 @@ function submitEmployeeHandler() {
         let dependentFirstName = $(item).find('input.firstName').val().toString();
         let dependentLastName = $(item).find('input.lastName').val().toString();
         if (!dependentFirstName && !dependentLastName) {
-            alert("Enter all dependents value");
+            alert("Enter Dependents' details");
             return;
         }
         dependents.push(new Beneficiary(dependentFirstName, dependentLastName));
