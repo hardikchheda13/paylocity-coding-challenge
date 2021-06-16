@@ -10,16 +10,17 @@
     <title>Paylocity</title>
 </head>
     <body>
-        <h1>Paylocity Benefits Cost Calculator</h1>
+        <div class="jumbotron">
+        <h1 style="color:brown">Paylocity Benefits Cost Calculator</h1>
+        </div>
         <div class="form">
             <div class="form-group col-md-10 employerIDDiv">
                 <label>Enter Employer ID</label>
                 <input type="text" class="form-control w-auto employerID">
             </div>
             <div class="form-group col-md-10 submitEmployerIDDiv">
-                <input type="submit" class="form-control w-auto submitEmployerID" value="Calculate Benefits Cost">
+                <input type="submit" class="form-control btn-primary w-auto submitEmployerID" value="Calculate Benefits Cost">
             </div>
-
             <div class="newEmployee">
                 <div class="row  employeeDetails d-none">
                     <div class="col firstNameDiv">
@@ -34,15 +35,15 @@
                 <div class="dependents">
 
                 </div>
-                <div class="row d-none" id="addDependentDiv">
-                    <input type="submit" class="form-control w-auto addDepndent" value="Add Dependent">
+                <div class="row mx-3 mb-2 d-none" id="addDependentDiv">
+                    <input type="submit" class="form-control btn btn-secondary w-auto addDepndent" value="Add Dependent">
                 </div>
             </div>
-            <div class="row col addEmployeeDiv">
-                <input type="submit" id="addEmployeeButton" class="w-auto addEmployee" value="Add Employee">
+            <div class="form-row mx-3 addEmployeeDiv">
+                <input type="submit" id="addEmployeeButton" class="form-control w-auto addEmployee" value="Add Employee">
             </div>
-            <div class="row col submitEmployeeDiv">
-                <input type="submit" id="submitEmployeeButton" class="w-auto d-none submitEmployee" value="Submit Employee">
+            <div class="form-row mx-3 submitEmployeeDiv">
+                <input type="submit" id="submitEmployeeButton" class="form-control btn-primary w-auto d-none submitEmployee" value="Submit Employee">
             </div>
             <div class="form-group col-md-10 resultDisplay d-none">
                 <div class="employeeTable">
